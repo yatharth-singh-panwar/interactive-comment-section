@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Interactive comments section</title>
+  <link rel="stylesheet" href="index.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Rubik&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Making the box for first comment . with correct dimention -->
+  <div class = "comment-box-container">
+    <div class = "upvote-downvote">
+
+      <div class="plus"><img src="images/icon-plus.svg"></div>
+      <div class="vote-number">12</div>
+      <div class="minus"><img src="images/icon-minus.svg"></div>
+    </div>
+    <div class = "comment-content">
+
+      <div class="profileAndReply">
+        <div class="profile">
+          <img src="images/avatars/image-amyrobson.png" alt="profile-picture" height="30px">
+        </div>
+        <div class="name">amyrobson</div>
+        <div class="time">1 month ago</div>
+        <div class="reply">
+          <img src="images/icon-reply.svg" alt="reply image"><p>Reply</p>
+        </div>
+      </div>
+      <div class="text">
+        <p>
+          Impressive! Though it seems the drag feature could be improved. But overall 
+          it looks incredible. You've nailed the design and the responsiveness at 
+          various breakpoints works really well.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+    
+    <!--Making the first reply box. -->
+  <div class="ReplyBox comment-box-container">
+
+    <div class="profile-new">
+      <img src="images/avatars/image-amyrobson.png" alt="profile-picture" height="35px">
+    </div>
+
+    <div class="Text-Area">
+      <textarea rows="4" cols="55"></textarea>
+    </div>
+
+    <div class="Send-Button">
+      <button>Reply</button>
+    </div>
+  </div>
+
+
+   <!--Making the second comment box. -->
+   <div class = "comment-box-container">
+    <div class = "upvote-downvote">
+
+      <div class="plus"><img src="images/icon-plus.svg"></div>
+      <div class="vote-number">5</div>
+      <div class="minus"><img src="images/icon-minus.svg"></div>
+
+
+    </div>
+    <div class = "comment-content">
+
+      <div class="profileAndReply">
+        <div class="profile">
+          <img src="images/avatars/image-maxblagun.png" alt="profile-picture" height="30px">
+        </div>
+        <div class="name">maxblagun</div>
+        <div class="time">2 weeks ago</div>
+        <div class="reply">
+          <img src="images/icon-reply.svg" alt="reply image"><p>Reply</p>
+        </div>
+      </div>
+      <div class="text">
+        <p>
+          Woah. your project looks awesome! How long have you been coding for? I'm still
+          new. but think I want to dive into React as well soon. Perhaps you can give me an
+          insight on where I can learn React? Thanks!
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+ 
+    <!-- Making the commmited reply comment box -->
+  <div class="reply-container-box">
+      
+      <div class="line">
+        
+      </div>
+
+      <div class="reply-container">
+        <div class="comment-replymsg-container comment-box-container">
+          
+            <div class = "upvote-downvote">
+        
+              <div class="plus"><img src="images/icon-plus.svg"></div>
+              <div class="vote-number">12</div>
+              <div class="minus"><img src="images/icon-minus.svg"></div>
+        
+        
+            </div>
+            <div class = "comment-content">
+        
+              <div class="profileAndReply">
+                <div class="profile">
+                  <img src="images/avatars/image-amyrobson.png" alt="profile-picture" height="30px">
+                </div>
+                <div class="name">amyrobson</div>
+                <div class="time">1 month ago</div>
+                <div class="reply">
+                  <img src="images/icon-reply.svg" alt="reply image"><p>Reply</p>
+                </div>
+              </div>
+              <div class="text">
+                <p>
+                  Impressive! Though it seems the drag feature could be improved. But overall 
+                  it looks incredible. You've nailed the design and the responsiveness at 
+                  various breakpoints works really well.
+                </p>
+              </div>
+            </div>
+        </div>
+
+
+        <div class ="commment-replymsg-container ReplyBox comment-box-container">
+          <div class="profile-new">
+            <img src="images/avatars/image-amyrobson.png" alt="profile-picture" height="35px">
+          </div>
+      
+          <div class="Text-Area">
+            <textarea rows="4" cols="50"></textarea>
+          </div>
+      
+          <div class="Send-Button">
+            <button>Reply</button>
+          </div>
+        </div>
+
+        
+        <div class="comment-editmsg-container comment-box-container">
+           <div class="profileInformation">
+              <div class = "upvote-downvote">
+                <div class="plus"><img src="images/icon-plus.svg"></div>
+                <div class="vote-number">12</div>
+                <div class="minus"><img src="images/icon-minus.svg"></div>
+              </div>
+              <div class="profileAndReply">
+                <div class="profile">
+                  <img src="images/avatars/image-juliusomo.png" alt="profile-picture" height="30px">
+                </div>
+                <div class="name">juliusomo</div>
+                <div class="self-comment name">
+                  you
+                </div>
+                <div class="time">2 days ago</div>
+                <div class="reply">
+                  <button class="delete"><img src="images/icon-delete.svg"> Delete</button>
+                  <button class="edit"><img src="images/icon-edit.svg"> Edit</button>
+                </div>  
+              </div>
+           </div>
+          <div class="edit-text">
+            <div class="text">
+              <p>
+               Hi this is yatharth singh panwarHi this is yatharth singh panwarHi twarHi this is yatharth singh panwarHi this is yatharth singh panwarHi this is yatharth singh panwar
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+  <!-- <div class="attribution">
+    
+    Coded by <a href="#">Yatharth Singh Panwar</a>.
+  </div> -->
+  
+</body>
+</html>

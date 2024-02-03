@@ -1,0 +1,240 @@
+body{
+    background-color: rgb(245, 246, 250);
+    margin:40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    row-gap: 1%;
+    height: 100vh;
+}
+
+.comment-box-container, .ReplyBox{
+    height: 16%;
+    width: 40%;
+    border-radius: 8px;
+    padding: 10px 20px 10px 0px;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+}
+
+.upvote-downvote{
+    flex :1;
+    border-radius: 10px;
+    margin:2%;
+    display:flex;
+    flex-direction: column;
+    background-color: rgb(245, 246, 249);
+}
+.comment-content{
+    flex: 14;
+    display:flex;
+    flex-direction: column;
+}
+.profileAndReply{
+    flex:3;
+    display: flex;
+    flex-direction: row;
+}
+.text{
+    flex:7;
+}
+
+/* The + - and vote number css */
+.plus,.vote-number,.minus{
+    flex:1;
+}
+
+.minus, .plus, .vote-number{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color:rgb(58, 57, 120);
+}
+/* 
+The profile, time and reply section */
+
+.profile, .name{
+    flex:1;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.time{
+    flex:3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+}
+.reply{
+    flex:11;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color:rgb(58, 57, 120);    
+}
+.reply p{
+    margin: 5px;
+}
+.text p{
+    margin-left:5px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+
+
+.ReplyBox{
+    
+    display: flex;
+    column-gap: 2%;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2%;
+    width: 40%;
+}
+.Text-Area, .Send-Button{
+    flex:10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 70%;
+}
+.profile-new{   
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 30%;
+    height: 70%;
+    flex:7;
+}
+/* 
+Setting the size of the textarea */
+textarea{
+    max-height: 100%;
+    resize: none;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 2%;
+    border-color: rgb(83, 88, 182);
+}
+.Text-Area{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.Send-Button button{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    flex:9;
+    background-color: rgb(83, 88, 182);
+    color: white;
+    height: 70%;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid;
+}
+
+.Send-Button button:hover{
+    background-color: rgb(196, 198, 239);
+}
+
+.reply-container-box{
+    height: 100%;
+    width: 41%;
+    column-gap: 5%;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.reply-container{
+    display: flex;
+    flex-direction: column;
+    row-gap:1%;
+    height: 100%;
+    width: 100%;
+
+}
+.comment-editmsg-container{
+    display:flex;
+    flex-direction : column;
+}
+.comment-replymsg-container, .commment-replymsg-container, .comment-editmsg-container{
+    flex:1;
+    width: 96.7%;
+    height: 100%;
+}
+
+.comment-editmsg-container .upvote-downvote{
+   flex:1;
+}
+.comment-editmsg-container .profileAndReply{
+    flex:10;
+}
+
+.comment-editmsg-container .reply{
+    column-gap:1%;
+    
+}
+.comment-editmsg-container .reply .delete{
+    color:red;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: white;
+    border: none;
+}
+
+.comment-editmsg-container .reply .delete:hover{
+    color:rgb(254, 183, 187);
+}
+.comment-editmsg-container .reply .edit{
+    color: rgb(83, 87, 182);
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: white;
+    border: none;
+}
+.comment-editmsg-container .reply .edit:hover{
+    color:rgb(199, 198, 245);
+}
+.line{
+    margin-left:4%;
+    background-color: rgb(232, 233, 236);
+    width: 0.5%;
+    height: 100%;
+}
+.profileInformation{
+    display:flex;
+}
+.edit-text .text {
+    margin-left: 55px;
+}
+
+.comment-editmsg-container .upvote-downvote{
+    height: 190%;
+    flex:0.75;
+    margin-top: 3%;
+}
