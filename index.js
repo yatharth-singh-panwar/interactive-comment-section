@@ -4,6 +4,7 @@
 //2 areas to call the each new function one is line 14 , and teh second one is line is  send button.
 //fetching the data.json file
 let datafile;
+
 fetch('data.json')
   .then(response => response.json())
   .then(data => {
@@ -49,9 +50,9 @@ function generateHTML(datafile){
     `
     <div class = "comment-box-container js-commentt-${id}">
       <div class = "upvote-downvote">
-        <div class="plus"><img src="images/icon-plus.svg"></div>
+        <div class="plus js-plus-${element.id}"><img src="images/icon-plus.svg"></div>
         <div class="vote-number">${vote}</div>
-        <div class="minus"><img src="images/icon-minus.svg"></div>
+        <div class="minus js-minus-${element.id}"><img src="images/icon-minus.svg"></div>
       </div>
       <div class = "comment-content">
         <div class="profileAndReply">
@@ -98,9 +99,9 @@ function generateHTML(datafile){
           <div class="comment-replymsg-container comment-box-container js-reply-id-${reply.id}">
             <div class = "upvote-downvote">
         
-              <div class="plus"><img src="images/icon-plus.svg"></div>
+              <div class="plus js-plus-${reply.id}"><img src="images/icon-plus.svg"></div>
               <div class="vote-number">${replyVoteNumber}</div>
-              <div class="minus"><img src="images/icon-minus.svg"></div>
+              <div class="minus js-minus-${reply.id}"><img src="images/icon-minus.svg"></div>
         
             </div>
             <div class = "comment-content">
@@ -111,7 +112,7 @@ function generateHTML(datafile){
                 <div class="name">${replyUserName}</div>
                 <div class="time">${replyDate}</div>
                 <div class="reply js-reply-in-${reply.id}">
-                  <img src="images/icon-reply.svg" alt="reply image"><p><a>Reply into</a></p>
+                  <img src="images/icon-reply.svg" alt="reply image"><p><a>Reply</a></p>
                 </div>
               </div>
               <div class="text">
@@ -125,14 +126,13 @@ function generateHTML(datafile){
         }
 
         else{
-          reply_container.innerHTML += ` 
-        
+          reply_container.innerHTML += `
           <div class="comment-editmsg-container comment-box-container js-reply-id-${reply.id}">
             <div class="profileInformation">
               <div class = "upvote-downvote">
-                <div class="plus"><img src="images/icon-plus.svg"></div>
+                <div class="plus js-plus-${reply.id}"><img src="images/icon-plus.svg"></div>
                 <div class="vote-number">${replyVoteNumber}</div>
-                <div class="minus"><img src="images/icon-minus.svg"></div>
+                <div class="minus js-minus-${reply.id}"><img src="images/icon-minus.svg"></div>
               </div>
               <div class="profileAndReply">
                 <div class="profile">
@@ -144,7 +144,7 @@ function generateHTML(datafile){
                 </div>
                 <div class="time">${replyDate}</div>
                 <div class="reply">
-                  <button class="delete"><img src="images/icon-delete.svg"> Delete</button>
+                  <button class="delete js-Delete-Id-${reply.id}"><img src="images/icon-delete.svg"> Delete</button>
                   <button class="edit"><img src="images/icon-edit.svg"> Edit</button>
                 </div>  
               </div>
@@ -158,7 +158,7 @@ function generateHTML(datafile){
             </div>
           </div>
           `
-        }
+        }       
       });
     }
     datafile[0].comments.forEach((element) => {
@@ -171,9 +171,27 @@ function generateHTML(datafile){
         });
       }
     });
+
+    datafile[0].comments.forEach((element) => {
+      if(element.replies.length > 0){
+        element.replies.forEach((reply) =>{ 
+          if(reply.user.username === datafile[0].currentUser.username){
+            deleteButton(reply.id, element.id);
+          }
+        }); 
+      }
+    });
+
+    datafile[0].comments.forEach(comment =>{
+      upVoteDownVote(comment.id);
+      if(comment.replies.length > 0){
+        comment.replies.forEach(reply=>{
+          upVoteDownVote(reply.id);
+        })
+      }
+    })
   })
 }
-
 //function that first saves the given text to the file.json and then regenrates the html.
 function sendButton (){
   const cSendButton = document.querySelector(".js-new-send-button");
@@ -268,12 +286,12 @@ function replyButtonsOut(id, username){
         //calculate the heigheset number of the given sequence and add 1 to it.
         let idOfnewmsg = 0;
         datafile[0].comments.forEach(element => {
-          if(idOfnewmsg < element.id){
+          if(idOfnewmsg <= element.id){
             idOfnewmsg = element.id+1;
           }
           if(element.replies.length > 0){
             element.replies.forEach(reply => {
-            if(idOfnewmsg < reply.id){
+            if(idOfnewmsg <= reply.id){
               idOfnewmsg = reply.id + 1;
             }
             })
@@ -312,14 +330,12 @@ function replyInside(id, username, ReplyingToid){
   //Make the chanegs commited to the paragraph tag in the datafile.js file and then regenerate the HTML .
   let replyButtons = document.querySelectorAll(`.js-reply-in-${id} a`);
   //here is the actual probelm both the new comment and the reply button are having the same id after being updated.
-  console.log(replyButtons);
  
   replyButtons.forEach(button => {
     button.addEventListener('click', ()=>{
       //generate the html for the replybox;
       //information for the data.json file.
       const currentUser = datafile[0].currentUser.username;
-
       const creplybox = document.querySelector(`.js-reply-id-${id}`);
       const nreplybox = document.createElement('div');
       nreplybox.classList.add('commment-replymsg-container', 'ReplyBox', 'comment-box-container');
@@ -340,11 +356,6 @@ function replyInside(id, username, ReplyingToid){
       
       const cSendButton = document.querySelector(`.js-replyinsidebutton-${button}`);
       cSendButton.addEventListener('click', ()=>{
-
-
-        // Here is the galti ig
-
-        
         const text = document.querySelector(`.js-textArea-${button} textarea`).value;
         const currentusername = datafile[0].currentUser.username;
         const time = "1 month ago";
@@ -353,12 +364,12 @@ function replyInside(id, username, ReplyingToid){
         //calculate the heigheset number of the given sequence
         let idOfnewmsg = 0;
         datafile[0].comments.forEach(element => {
-          if(idOfnewmsg < element.id){
+          if(idOfnewmsg <= element.id){
             idOfnewmsg = element.id + 1;
           }
           if(element.replies.length > 0){
             element.replies.forEach(reply => {
-            if(idOfnewmsg < reply.id){
+            if(idOfnewmsg <= reply.id){
               idOfnewmsg = reply.id + 1;
             }
             })
@@ -391,4 +402,108 @@ function replyInside(id, username, ReplyingToid){
     });
   });
 
+}
+
+
+function deleteButton(idOfDeleteButton, replymsgId){
+  let deleteButtons = document.querySelectorAll(`.js-Delete-Id-${idOfDeleteButton}`)
+
+  deleteButtons.forEach(button => {
+    button.addEventListener('click',()=>{
+      datafile[0].comments.forEach(comment =>{
+        if(comment.id === replymsgId){
+          if(comment.replies.length > 0){
+            comment.replies.forEach((reply, index) =>{
+              if(reply.id === idOfDeleteButton){
+                comment.replies.splice(index, 1);
+              }
+            })
+          }
+        }
+      })
+      generateHTML(datafile);
+      sendButton();
+    })
+  });
+}
+
+function upVoteDownVote(replyId) {
+  const cPlus = document.querySelectorAll(`.js-plus-${replyId}`);
+  const cMinus = document.querySelectorAll(`.js-minus-${replyId}`);
+
+  // Add the plus number functionality. Each button will have the default as false
+  cPlus.forEach(plusbutton => {
+    plusbutton.addEventListener('click', () => {
+      // Get the comment id score
+      let presentScore;
+      datafile[0].comments.forEach(comment => {
+        if (comment.id === replyId) {
+          presentScore = comment.score;
+        }
+        if (comment.replies.length > 0) {
+          comment.replies.forEach(reply => {
+            if (reply.id === replyId) {
+              presentScore = reply.score;
+            }
+          });
+        }
+      });
+      // Add 1 to the score 
+      const newScore = presentScore + 1;
+
+      // Update the score in the datafile
+      datafile[0].comments.forEach(comment => {
+        if (comment.id === replyId) {
+          comment.score = newScore;
+        }
+        if (comment.replies.length > 0) {
+          comment.replies.forEach(reply => {
+            if (reply.id === replyId) {
+              reply.score = newScore;
+            }
+          });
+        }
+      });
+      // Set the score to the textarea of the next sibling Element (i.e., the textarea where the score is displayed.)
+      plusbutton.nextElementSibling.textContent = newScore;
+    });
+  });
+
+  // Add the minus number functionality. Each button will have the default as false
+  cMinus.forEach(minusbutton => {
+    minusbutton.addEventListener('click', () => {
+      // Get the comment id score
+      let presentScore;
+      datafile[0].comments.forEach(comment => {
+        if (comment.id === replyId) {
+          presentScore = comment.score;
+        }
+        if (comment.replies.length > 0) {
+          comment.replies.forEach(reply => {
+            if (reply.id === replyId) {
+              presentScore = reply.score;
+            }
+          });
+        }
+      });
+      // Subtract 1 from the score 
+      const newScore = presentScore - 1;
+
+      // Update the score in the datafile
+      datafile[0].comments.forEach(comment => {
+        if (comment.id === replyId) {
+          comment.score = newScore;
+        }
+        if (comment.replies.length > 0) {
+          comment.replies.forEach(reply => {
+            if (reply.id === replyId) {
+              reply.score = newScore;
+            }
+          });
+        }
+      });
+      // Set the score to the textarea of the previous sibling Element (i.e., the textarea where the score is displayed.)
+      minusbutton.previousElementSibling.textContent = newScore;
+    });
+  });
 }

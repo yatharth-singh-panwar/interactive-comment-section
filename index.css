@@ -262,3 +262,8 @@ textarea{
    }
 }
 
+.comment-content {
+    max-width: 100%; /* Ensure the comment content doesn't exceed the container width */
+    overflow-y: auto; /* Enable scrolling if the content overflows */
+    max-height: 150px; /* Adjust the maximum height as per your design */
+  }
