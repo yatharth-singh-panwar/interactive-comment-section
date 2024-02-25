@@ -122,6 +122,10 @@ The profile, time and reply section */
     height: 70%;
     flex:7;
 }
+
+.special-box textarea{
+    margin:0px;
+}
 /* 
 Setting the size of the textarea */
 textarea{

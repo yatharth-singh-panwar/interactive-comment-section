@@ -145,7 +145,7 @@ function generateHTML(datafile){
                 <div class="time">${replyDate}</div>
                 <div class="reply">
                   <button class="delete js-Delete-Id-${reply.id}"><img src="images/icon-delete.svg"> Delete</button>
-                  <button class="edit"><img src="images/icon-edit.svg"> Edit</button>
+                  <button class="edit js-edit-${reply.id}"><img src="images/icon-edit.svg"> Edit</button>
                 </div>  
               </div>
             </div>
@@ -177,6 +177,7 @@ function generateHTML(datafile){
         element.replies.forEach((reply) =>{ 
           if(reply.user.username === datafile[0].currentUser.username){
             deleteButton(reply.id, element.id);
+            editButton(reply.id);
           }
         }); 
       }
@@ -504,6 +505,53 @@ function upVoteDownVote(replyId) {
       });
       // Set the score to the textarea of the previous sibling Element (i.e., the textarea where the score is displayed.)
       minusbutton.previousElementSibling.textContent = newScore;
+    });
+  });
+}
+
+function editButton(idOfEditButton) {
+  const editButtons = document.querySelectorAll(`.js-edit-${idOfEditButton}`);
+  console.log(editButtons);
+
+  editButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const paragraph11 = button.parentElement.parentElement.parentElement.parentElement.querySelector('.edit-text');
+
+      const paragraph = paragraph11.querySelector('.text p');
+      const text = paragraph.textContent;
+      
+      // Replace the paragraph with a textarea containing the current text
+      const textarea = document.createElement('textarea');
+      textarea.classList.add('commment-replymsg-container');
+      textarea.value = text;
+      paragraph.replaceWith(textarea);
+
+      // Create a save button
+      const saveButton = document.createElement('button');
+      saveButton.classList.add('edit');
+      saveButton.textContent = 'Save';
+      button.parentElement.appendChild(saveButton);
+
+      // Add event listener to the save button
+      saveButton.addEventListener('click', () => {
+        // Update the text in the datafile
+        datafile[0].comments.forEach(comment => {
+          if (comment.id === idOfEditButton) {
+            comment.content = textarea.value;
+          }
+          if (comment.replies.length > 0) {
+            comment.replies.forEach(reply => {
+              if (reply.id === idOfEditButton) {
+                reply.content = textarea.value;
+              }
+            });
+          }
+        });
+
+        // Regenerate the HTML
+        generateHTML(datafile);
+        sendButton();
+      });
     });
   });
 }
